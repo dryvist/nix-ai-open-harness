@@ -258,6 +258,27 @@ in
         description = "Free-form settings recursively merged over the generated MiMoCode config.";
       };
     };
+
+    goose = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Install Goose CLI and render ~/.config/goose/config.yaml when programs.openHarness.enable is true.";
+      };
+
+      package = mkOption {
+        type = types.package;
+        default = packageSet.goose-cli;
+        defaultText = lib.literalExpression "inputs.nix-ai-tools.packages.<system>.goose-cli";
+        description = "Goose CLI package.";
+      };
+
+      extraSettings = mkOption {
+        type = types.attrs;
+        default = { };
+        description = "Free-form settings recursively merged over the generated Goose config.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -281,7 +302,9 @@ in
     ];
 
     home.packages =
-      optional cfg.crush.enable cfg.crush.package ++ optional cfg.mimoCode.enable cfg.mimoCode.package;
+      optional cfg.crush.enable cfg.crush.package ++
+      optional cfg.mimoCode.enable cfg.mimoCode.package ++
+      optional cfg.goose.enable cfg.goose.package;
 
     home.file = mkMerge [
       (mkIf cfg.crush.enable {
@@ -289,6 +312,13 @@ in
       })
       (mkIf cfg.mimoCode.enable {
         ".config/mimocode/mimocode.json".text = builtins.toJSON mimoConfig;
+      })
+      (mkIf cfg.goose.enable {
+        ".config/goose/config.yaml".text = ''
+          GOOSE_PROVIDER: "openai"
+          GOOSE_MODEL: "${cfg.defaultModel}"
+          OPENAI_HOST: "${cfg.endpoint}"
+        '';
       })
     ];
   };

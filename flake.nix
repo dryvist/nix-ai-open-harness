@@ -57,12 +57,13 @@
         in
         {
           packages = {
-            inherit (aiPackages) crush mimo-code;
+            inherit (aiPackages) crush mimo-code goose-cli;
             default = pkgs.symlinkJoin {
               name = "nix-ai-open-harness-tools";
               paths = [
                 aiPackages.crush
                 aiPackages.mimo-code
+                aiPackages.goose-cli
               ];
             };
           };
