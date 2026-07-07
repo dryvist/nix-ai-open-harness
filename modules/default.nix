@@ -302,9 +302,9 @@ in
     ];
 
     home.packages =
-      optional cfg.crush.enable cfg.crush.package ++
-      optional cfg.mimoCode.enable cfg.mimoCode.package ++
-      optional cfg.goose.enable cfg.goose.package;
+      optional cfg.crush.enable cfg.crush.package
+      ++ optional cfg.mimoCode.enable cfg.mimoCode.package
+      ++ optional cfg.goose.enable cfg.goose.package;
 
     home.file = mkMerge [
       (mkIf cfg.crush.enable {
