@@ -263,14 +263,7 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Install Goose CLI and render ~/.config/goose/config.yaml when programs.openHarness.enable is true.";
-      };
-
-      package = mkOption {
-        type = types.package;
-        default = packageSet.goose-cli;
-        defaultText = lib.literalExpression "inputs.nix-ai-tools.packages.<system>.goose-cli";
-        description = "Goose CLI package.";
+        description = "Render ~/.config/goose/config.yaml for the Homebrew-managed Goose CLI when programs.openHarness.enable is true.";
       };
 
       extraSettings = mkOption {
@@ -302,9 +295,12 @@ in
     ];
 
     home.packages =
-      optional cfg.crush.enable cfg.crush.package
-      ++ optional cfg.mimoCode.enable cfg.mimoCode.package
-      ++ optional cfg.goose.enable cfg.goose.package;
+      optional cfg.crush.enable cfg.crush.package ++ optional cfg.mimoCode.enable cfg.mimoCode.package;
+
+    # Goose deliberately differs from the Nix-packaged harness tools: the
+    # Homebrew-managed block-goose-cli binary avoids rebuilding Goose's large
+    # Rust test graph in every MacBook Home Manager closure. goose.enable only
+    # controls this config file; Homebrew owns the binary installation.
 
     home.file = mkMerge [
       (mkIf cfg.crush.enable {

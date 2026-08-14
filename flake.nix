@@ -1,5 +1,5 @@
 {
-  description = "Declarative local-LLM fallback harness for Crush and MiMoCode";
+  description = "Declarative local-LLM fallback harness for Crush and MiMoCode with Homebrew Goose configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -57,13 +57,17 @@
         in
         {
           packages = {
-            inherit (aiPackages) crush mimo-code goose-cli;
+            inherit (aiPackages) crush mimo-code;
+
+            # Goose is intentionally a Homebrew-only exception: its Nix package
+            # rebuilds a large Rust test graph in the MacBook Home Manager closure.
+            # This flake configures the existing block-goose-cli installation but
+            # must never re-export or install a second Nix-managed Goose binary.
             default = pkgs.symlinkJoin {
               name = "nix-ai-open-harness-tools";
               paths = [
                 aiPackages.crush
                 aiPackages.mimo-code
-                aiPackages.goose-cli
               ];
             };
           };

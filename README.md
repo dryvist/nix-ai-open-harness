@@ -7,6 +7,13 @@ This flake installs and configures two workstation tools:
 - [Crush](https://github.com/charmbracelet/crush)
 - [MiMoCode](https://github.com/XiaomiMiMo/MiMo-Code)
 
+It also renders configuration for the existing Homebrew-managed
+[`block-goose-cli`](https://formulae.brew.sh/formula/block-goose-cli) installation.
+Goose deliberately does not enter `home.packages`: its Nix package compiles a large
+Rust test graph during MacBook Home Manager closure builds. `goose.enable` is the
+single Goose switch and controls only whether its configuration is rendered; the
+consumer's Homebrew policy owns installing the binary.
+
 Both tools are pointed at the same OpenAI-compatible LLM fabric endpoint used by
 the rest of the homelab stack, normally `https://llm.<domain>/v1`. The bearer
 token is read from a runtime file by each tool, so token values never enter the
@@ -40,9 +47,9 @@ Add the flake to a Home Manager or nix-darwin consumer and import the module:
 }
 ```
 
-The consumer owns the endpoint and token source because those values are
-environment-specific. This repo owns the tool package selection and config file
-rendering.
+The consumer owns the endpoint, token source, and Homebrew installation because
+those values are environment-specific. This repo owns the Crush/MiMoCode package
+selection and all harness config-file rendering.
 
 ## Options
 
@@ -57,6 +64,7 @@ rendering.
 | `programs.openHarness.models`          | capability aliases | Models exposed to both tools       |
 | `programs.openHarness.crush.enable`    | follows parent     | Render Crush config and package    |
 | `programs.openHarness.mimoCode.enable` | follows parent     | Render MiMoCode config and package |
+| `programs.openHarness.goose.enable`    | follows parent     | Render config for Homebrew Goose   |
 
 ## Validation
 
@@ -71,4 +79,6 @@ nix fmt
   or environment expansion.
 - MiMoCode points at the configured endpoint and reads the token with
   `{file:...}` or `{env:...}` substitution.
+- Goose receives its OpenAI provider, model, and endpoint configuration without
+  adding a Goose package to Home Manager.
 - No literal token value is rendered into either config.
