@@ -53,13 +53,20 @@ let
   mimoConfig =
     pkgs.writeText "mimocode.json"
       hmConfig.config.home.file.".config/mimocode/mimocode.json".text;
+  gooseConfig =
+    pkgs.writeText "goose-config.yaml"
+      hmConfig.config.home.file.".config/goose/config.yaml".text;
   crushEnvConfig =
     pkgs.writeText "crush-env.json"
       hmEnvConfig.config.home.file.".config/crush/crush.json".text;
   mimoEnvConfig =
     pkgs.writeText "mimocode-env.json"
       hmEnvConfig.config.home.file.".config/mimocode/mimocode.json".text;
+  goosePackages = builtins.filter (
+    package: builtins.match ".*goose.*" package.name != null
+  ) hmConfig.config.home.packages;
 in
+assert goosePackages == [ ];
 {
   config-fixture =
     pkgs.runCommand "open-harness-config-fixture-${system}" { nativeBuildInputs = [ pkgs.jq ]; }
@@ -75,6 +82,10 @@ in
         jq -e '.small_model == "dryvist-local-llm/quickest"' ${mimoConfig}
         jq -e '.enabled_providers == ["dryvist-local-llm"]' ${mimoConfig}
         jq -e '.autoupdate == false' ${mimoConfig}
+
+        grep -Fx 'GOOSE_PROVIDER: "openai"' ${gooseConfig}
+        grep -Fx 'GOOSE_MODEL: "coding"' ${gooseConfig}
+        grep -Fx 'OPENAI_HOST: "${endpoint}"' ${gooseConfig}
 
         jq -e '.providers."dryvist-local-llm".api_key == "$OPENAI_API_KEY"' ${crushEnvConfig}
         jq -e '.provider."dryvist-local-llm".options.apiKey == "{env:OPENAI_API_KEY}"' ${mimoEnvConfig}
