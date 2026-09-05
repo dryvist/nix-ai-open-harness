@@ -1,3 +1,6 @@
+---
+skill-groups: [core, nix]
+---
 # nix-ai-open-harness - AI Agent Instructions
 
 Declarative local-LLM fallback harness for open AI coding agents.
