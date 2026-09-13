@@ -23,6 +23,17 @@
       url = "github:numtide/nix-ai-tools";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Config source for OpenCode: this repo decides WHETHER the harness ships
+    # it (programs.openHarness.opencode); nix-ai owns the option schema and
+    # renders ~/.config/opencode/opencode.json. Consumers that also import
+    # nix-ai themselves (nix-darwin) follow this input back onto their own to
+    # keep a single instance.
+    nix-ai = {
+      url = "github:dryvist/nix-ai/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -31,6 +42,7 @@
       home-manager,
       flake-parts,
       nix-ai-tools,
+      nix-ai,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -46,7 +58,14 @@
       ];
 
       flake.homeManagerModules.default = {
-        imports = [ ./modules ];
+        # Imported here, not from ./modules: nix-ai is a flake argument, and
+        # referencing _module.args from a module's imports recurses forever
+        # (imports evaluate before args are wired — same reason nix-ai imports
+        # nix-claude-code's schema module at its own flake level).
+        imports = [
+          ./modules
+          nix-ai.homeManagerModules.opencode
+        ];
         _module.args.nix-ai-tools = nix-ai-tools;
       };
 
