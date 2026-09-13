@@ -65,8 +65,12 @@ let
   goosePackages = builtins.filter (
     package: builtins.match ".*goose.*" package.name != null
   ) hmConfig.config.home.packages;
+  # Rendered by nix-ai's programs.opencode module (imported, not owned, here);
+  # .source is a derivation whose outPath jq reads directly.
+  opencodeConfig = hmConfig.config.home.file.".config/opencode/opencode.json".source;
 in
 assert goosePackages == [ ];
+assert hmConfig.config.programs.opencode.enable;
 {
   config-fixture =
     pkgs.runCommand "open-harness-config-fixture-${system}" { nativeBuildInputs = [ pkgs.jq ]; }
@@ -86,6 +90,10 @@ assert goosePackages == [ ];
         grep -Fx 'GOOSE_PROVIDER: "openai"' ${gooseConfig}
         grep -Fx 'GOOSE_MODEL: "coding"' ${gooseConfig}
         grep -Fx 'OPENAI_HOST: "${endpoint}"' ${gooseConfig}
+
+        jq -e '.lsp == true' ${opencodeConfig}
+        jq -e 'has("mcp")' ${opencodeConfig}
+        jq -e 'has("permission")' ${opencodeConfig}
 
         jq -e '.providers."dryvist-local-llm".api_key == "$OPENAI_API_KEY"' ${crushEnvConfig}
         jq -e '.provider."dryvist-local-llm".options.apiKey == "{env:OPENAI_API_KEY}"' ${mimoEnvConfig}

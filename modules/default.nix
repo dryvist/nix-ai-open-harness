@@ -13,6 +13,7 @@ let
     mkIf
     mkMerge
     mkOption
+    mkOverride
     optional
     types
     ;
@@ -272,6 +273,14 @@ in
         description = "Free-form settings recursively merged over the generated Goose config.";
       };
     };
+
+    opencode = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable OpenCode through nix-ai's programs.opencode module (package plus the rendered ~/.config/opencode/opencode.json) when programs.openHarness.enable is true.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -296,6 +305,13 @@ in
 
     home.packages =
       optional cfg.crush.enable cfg.crush.package ++ optional cfg.mimoCode.enable cfg.mimoCode.package;
+
+    # OpenCode's enablement lives HERE (which open agents ship with the
+    # harness); its option schema and rendered config live in nix-ai
+    # (imported at the top). Priority 90 beats nix-ai's unconditional enable
+    # (plain set, priority 100) without matching a consumer's mkForce (50),
+    # so a host-level security scope still wins.
+    programs.opencode.enable = mkOverride 90 cfg.opencode.enable;
 
     # Goose deliberately differs from the Nix-packaged harness tools: the
     # Homebrew-managed block-goose-cli binary avoids rebuilding Goose's large
