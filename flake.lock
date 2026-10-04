@@ -424,11 +424,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1791052885,
-        "narHash": "sha256-moVMznXcwZ7jYlk+3UPlbfcsnrICqH1GCMiIOWynfvo=",
+        "lastModified": 1791153044,
+        "narHash": "sha256-BLXXATT27p49TZp4ojVdtn0MzZbecgJ2KfYRnv0KcLY=",
         "owner": "dryvist",
         "repo": ".github",
-        "rev": "c6bcb592e504dc190ae86e4b6ad596cee4261a2a",
+        "rev": "d3c1fee88032da506f32e69c6c8585a7ec79273b",
         "type": "github"
       },
       "original": {
@@ -779,11 +779,11 @@
     "homelab-contracts": {
       "flake": false,
       "locked": {
-        "lastModified": 1791109531,
-        "narHash": "sha256-fZjrcC/kSxTSJuoZEQVnBM6khZAUy7RPquJu9VUiwQE=",
+        "lastModified": 1791133484,
+        "narHash": "sha256-j5V+THOlxmPhD5LclaH8yXjSEx6U2d9SQC+TKM3kBXE=",
         "owner": "dryvist",
         "repo": "homelab-contracts",
-        "rev": "fd486a9dcf94f57f2022c7727ba1160e9946974a",
+        "rev": "b91c6bda0668a1570cdf09867e0ccf09fe04fb46",
         "type": "github"
       },
       "original": {
@@ -1022,11 +1022,11 @@
         "vct-splunk-cli": "vct-splunk-cli"
       },
       "locked": {
-        "lastModified": 1791133852,
-        "narHash": "sha256-XHyUrC2yg56iObzDrsgcI9riT++KFvfKISiit6Q5TY4=",
+        "lastModified": 1791145862,
+        "narHash": "sha256-SRIb/af895cCaM3fyD/LujqiRNQstFTg98YJmebutPQ=",
         "owner": "dryvist",
         "repo": "nix-ai",
-        "rev": "802781b0272309beba42f9eef347237897977ce0",
+        "rev": "dc3a9d01bca78c70a514ebc7dc0d62dfec773829",
         "type": "github"
       },
       "original": {
