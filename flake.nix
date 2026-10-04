@@ -57,7 +57,7 @@
         inputs.dryvist-github.flakeModules.dev-hygiene
       ];
 
-      flake.homeManagerModules.default = {
+      flake.homeManagerModules.default = { lib, ... }: {
         # Imported here, not from ./modules: nix-ai is a flake argument, and
         # referencing _module.args from a module's imports recurses forever
         # (imports evaluate before args are wired — same reason nix-ai imports
@@ -67,7 +67,7 @@
           nix-ai.homeManagerModules.opencode
         ];
         _module.args = {
-          inherit (nix-ai.inputs) awesome-claude-skills;
+          awesome-claude-skills = lib.mkDefault nix-ai.inputs.awesome-claude-skills;
           inherit nix-ai-tools;
         };
       };
