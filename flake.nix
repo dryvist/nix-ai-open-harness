@@ -66,7 +66,10 @@
           ./modules
           nix-ai.homeManagerModules.opencode
         ];
-        _module.args.nix-ai-tools = nix-ai-tools;
+        _module.args = {
+          inherit (nix-ai.inputs) awesome-claude-skills;
+          inherit nix-ai-tools;
+        };
       };
 
       perSystem =
