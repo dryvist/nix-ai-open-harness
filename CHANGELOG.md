@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/dryvist/nix-ai-open-harness/compare/nix-ai-open-harness-v0.2.1...nix-ai-open-harness-v0.2.2) (2026-10-04)
+
+
+### Bug Fixes
+
+* default the awesome-claude-skills module argument ([4415706](https://github.com/dryvist/nix-ai-open-harness/commit/441570601a6ea27390dfa17110a0ea054f9c10a2))
+* set a default module argument priority ([461c4fe](https://github.com/dryvist/nix-ai-open-harness/commit/461c4fe7e9048d260f336bd5858130c55c84024c))
+
 ## [0.2.1](https://github.com/dryvist/nix-ai-open-harness/compare/nix-ai-open-harness-v0.2.0...nix-ai-open-harness-v0.2.1) (2026-10-04)
 
 
