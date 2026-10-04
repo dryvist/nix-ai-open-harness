@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/dryvist/nix-ai-open-harness/compare/nix-ai-open-harness-v0.2.0...nix-ai-open-harness-v0.2.1) (2026-10-04)
+
+
+### Bug Fixes
+
+* pass the skill source to the OpenCode module ([0532151](https://github.com/dryvist/nix-ai-open-harness/commit/05321517407b05400093c96d80575206df9f8d81))
+
 ## [0.2.0](https://github.com/dryvist/nix-ai-open-harness/compare/nix-ai-open-harness-v0.1.0...nix-ai-open-harness-v0.2.0) (2026-10-04)
 
 
