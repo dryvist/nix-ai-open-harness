@@ -475,11 +475,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1791640660,
-        "narHash": "sha256-BCKHLQgyuHR9MgSLDlfB4728OHBP8hOP4jb8R37/pJ8=",
+        "lastModified": 1791659356,
+        "narHash": "sha256-+SILEhgV9mu8QCSVmdECq+QyQ3EY/UEg2wkm1vKDwbw=",
         "owner": "dryvist",
         "repo": ".github",
-        "rev": "55ece17400609479a027eaea2d5473ebbf7d93dc",
+        "rev": "8b2ab29ff2a86547cefab11913d737f1062b1a7c",
         "type": "github"
       },
       "original": {
@@ -1092,11 +1092,11 @@
         "vct-splunk-cli": "vct-splunk-cli"
       },
       "locked": {
-        "lastModified": 1791643104,
-        "narHash": "sha256-h7qCm/lMbWSm834bSzVCtLR1gwPG/s/q+8TPR4GjDWE=",
+        "lastModified": 1791643884,
+        "narHash": "sha256-5qv52XZAFAiEZkkYDIxwB+45J0VcM/hy5DAQ6Rj8vNg=",
         "owner": "dryvist",
         "repo": "nix-ai",
-        "rev": "a52d3485617c3e50bf2950813a7c66591f4b2a91",
+        "rev": "44323693c151b255596d8fba5da52b0e957151da",
         "type": "github"
       },
       "original": {
