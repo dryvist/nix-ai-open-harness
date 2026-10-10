@@ -15,7 +15,7 @@
     };
 
     dryvist-github = {
-      url = "github:dryvist/.github";
+      url = "github:dryvist/.github?ref=v1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,7 +30,7 @@
     # nix-ai themselves (nix-darwin) follow this input back onto their own to
     # keep a single instance.
     nix-ai = {
-      url = "github:dryvist/nix-ai/main";
+      url = "github:dryvist/nix-ai?ref=v7";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
