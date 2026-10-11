@@ -25,7 +25,7 @@ Add the flake to a Home Manager or nix-darwin consumer and import the module:
 
 ```nix
 {
-  inputs.nix-ai-open-harness.url = "github:dryvist/nix-ai-open-harness";
+  inputs.nix-ai-open-harness.url = "github:dryvist/nix-ai-open-harness?ref=vN";
 
   outputs =
     { nix-ai-open-harness, ... }:
