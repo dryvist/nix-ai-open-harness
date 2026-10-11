@@ -3,7 +3,8 @@
   "release-type": "simple",
   "packages": {
     ".": {
-      "package-name": "nix-ai-open-harness"
+      "package-name": "nix-ai-open-harness",
+      "include-component-in-tag": false
     }
   }
 }
