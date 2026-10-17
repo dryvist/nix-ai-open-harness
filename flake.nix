@@ -15,7 +15,7 @@
     };
 
     dryvist-github = {
-      url = "github:dryvist/.github?ref=v1";
+      url = "github:JacobPEvans/.github?ref=v1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
